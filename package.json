@@ -1,0 +1,11 @@
+{
+  "name": "goBarberBackend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/celsoyh/goBarberBackend.git",
+  "author": "Celso Hashimoto <celsoyh@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
