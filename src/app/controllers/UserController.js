@@ -1,4 +1,5 @@
 import User from '../models/User';
+import bcrypt from 'bcryptjs';
 
 class UserController {
   async store(req, res) {
@@ -12,8 +13,25 @@ class UserController {
     return res.json({ id, name, email, provider });
   }
 
-  update(req, res) {
-    return res.json({ message: '' });
+  async update(req, res) {
+    const user = await User.findByPk(req.userId);
+
+    const { name, email, password, confirm_password } = req.body;
+
+    if (email !== user.email) {
+      const isEmailValid = await User.findOne({ where: { email } });
+
+      if (isEmailValid)
+        return res.status(401).json({ error: 'E-mail already in use' });
+    }
+
+    if (confirm_password && password !== confirm_password) {
+      return res.status(401).json({ error: 'Password does not match' });
+    }
+
+    const { id } = await user.update(req.body);
+
+    return res.json({ name, id, email });
   }
 }
 
