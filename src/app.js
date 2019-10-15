@@ -1,5 +1,6 @@
 import express from 'express';
 import routes from './routes';
+import { resolve } from 'path';
 import './database';
 
 class App {
@@ -12,6 +13,10 @@ class App {
 
   middlewares() {
     this.express.use(express.json());
+    this.express.use(
+      '/files',
+      express.static(resolve(__dirname, '..', 'tmp', 'uploads'))
+    );
   }
 
   routes() {
