@@ -29,6 +29,7 @@ class ScheduleController {
           [Op.between]: [startOfDay(parsedDate), endOfDay(parsedDate)],
         },
       },
+      attributes: ['id', 'date', 'user_id', 'provider_id'],
       order: ['date'],
     });
 
